@@ -1,0 +1,8 @@
+middleware in next.js is a powerful feature that offers a robust way to intercept and control the flow of requests and responses within your applciation
+
+it does this at a global level signifciatioly enhancing features like redirection, URL rewrites, authentication, headers, and cookies management and more.
+
+Middleware allows use to specifiy paths where it will be active
+
+-customer macther config
+-conditional statements

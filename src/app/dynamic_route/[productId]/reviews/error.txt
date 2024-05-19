@@ -1,0 +1,39 @@
+Error
+Error automaticly wraps a route segment and its nested children in a react error boundry
+this can create an error UI tailored to a specific sehments using the file-system hierarychy to adjust granularity
+
+and to islate error to affected segments while keeping the rest of the applicaiton
+
+add functionalty to attempt to recoever from an error without a full page reloaded
+
+An error.tsx in a deeply nested folder will break the entire application
+
+Error boundries have to be timed components in next.js
+
+Handling errors in nested routes: errors bubble up to the closest parent error boundary
+An error.tsx file will cater to errors for all its nested child segmentsBy positioning error.tsx
+files at different level in the nested folder of a route you can acheieve a more granular
+level of error handling
+
+
+
+google component hierarchy
+layout
+template
+errorboundry
+suspense
+errorboundry
+page
+errorboundry
+suspense
+errorboundry
+template
+layout
+
+Files in app look like this
+layout.js
+template.js
+error.js
+loading.js
+not-found.js
+page.js

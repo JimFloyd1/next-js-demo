@@ -1,0 +1,1 @@
+if routes.ts and page.tsx are on the same route segment level as page.tsx will result in a conflict and the page will not be served. 

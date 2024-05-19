@@ -1,0 +1,9 @@
+Templates are simlar to layouts in the way they wrap each child layout or page
+However, with templates, when a user naviagtes between routes that share a template, a new instance of the component is mounted
+DOM elements are recrated and the state is not preserved, and the effects are re-synchronized
+
+A template can be defined by exporting a default React component from a template.js or template.tsx file
+
+Similar to layouts, templates also should accept a children prop which will render the nested segments in the route
+
+Use layouts for shared UI and templates if you dont want to share UI

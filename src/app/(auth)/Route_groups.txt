@@ -1,0 +1,6 @@
+Mark a folder with a route group by adding () around the folder name to exclude it
+from the routes URL. This tells next js () the route group name "auth" in this situation
+should be omitted from the URL path.
+(auth) folder is just there to help organize our code
+
+You can have multiple nested (Route Groups) if needed

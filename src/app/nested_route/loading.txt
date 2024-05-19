@@ -1,0 +1,10 @@
+loading
+you can display the loading state as soon as a user navigates to a new route
+
+This loading pages lets the user know the that
+thier action has been acknowledged, and reduces
+percieved loading time and makes apps feel more responsive
+
+next.js allows the creating of shared layouts that reminan interactive while new route segments are loading
+
+users can continue interacting with certain parts of the application, such as a navigation menu or sidebar, even if the main content is still being fetched 
