@@ -1,0 +1,84 @@
+Server side solutions
+1. static site generation SSG
+2. Server side rendering SSR
+
+SSG occurs at build time when the application is deployed on the server. This results in pages that are already rendered and ready to serve.
+It is ideal for content change often, like blog posts
+
+SSR on the other hand renders pages on demand in responses to user requests. It is suitable for personalized content like social media feeds, where the HTML depends on the logged in user
+Drwbacks - 1. you have to fetch everything befroe you can show anything. this can delays the servers responses time to the browser as the server must finsih collecting all necessary data before any part of the page can be sent to the client
+2. you have to load everyting before you can hydrate anything. for successful hydration where react adds interactitvy to the server rendered html, the componenet tree in the browser must exactly match the server generated component tree
+This means all the javascript for the componenets must be loaded on the client before you can start hydrating
+3. you have to hydrate everything before you can interat with anything
+React hydrates the componenet tree in a single pass meaning once it starts hydrating it wont stop until its finished with the entire tree
+As a consequence, all componenets must be hydrated before you can interact with any of them
+Drawbacks - is all or nothing waterfall, having to load the sata for the entire page, load the javascript for the entire page, and hydrate the entire pagethis create an 'all or nothing; waterfall probelm that spans from the server to the client where each issue must be resolved before moving on to the next one.
+This is ineffienct if some parts of your app are slower than others, as is often the case in real world apps.
+Data fetching must be compleeted before the sevrer can render the HTML, the Javascript is required for the componenets needs to be fully loaded on the client side before hydration process can start
+All componenets have to be hydrated before they become interactiev . So if some parts of your application are slower than others, then this will result in an ineffciencies. since its an all or nothing load
+
+SOO the REACT team had to address these issues of SSR by using the Suspense SSR archtecture which lets you do HTML streaming on the server and selective hydration on the client
+If you have a heavy piece of JS thats slowing down everything make sure to use <suspense> selective hydration which allows sections become avilable when they render
+React begins hydrating as soon as possible whihc enables interactions with elements like the header and side navigation without wating for the main content to be hydrated. Selective hydration offers a solution to the third issue: the necessity to hydrate everything to interact with anything
+Could also check out code splitting using <script> tags and react.lazy for code splitting which enables you to seperate the main sectors code from the primary JS bundle
+
+RCS
+Server components take charge of data fetching and static rendering while client components are tasked with rendering the interactive elements of the application
+The RSC architecture enables React application to leverage the best aspects of both sever and client rendering while using a single language, single framework and choesive set of API's
+Prowash likely will need an SSG
+
+
+
+Static rendering:
+static rendering is a server rendering startegy where we generate HTML pages at the time of building our application
+This approach allows the page to be built once, cached by a CDN, and served to the client almost instantly
+This optiomization alos enables you to share the result of the rendering work amoung different users, resulting in a significant performance boost for you application
+Static rendering particulary useful for blog pages e-commerce product pages, documentation and marketing pages
+
+How do we inform Next.js we want to use static rendering
+Static rendering is the default rendering startegy in the app router
+All routes are automaticlly prepared at build time without additional setup
+We cannot afford to build our app once, make changes, rebuild, and so on
+For production builds a page will be pre-rendered once when we run the build command
+in development mode, a page will be pre-rendered for every request
+
+Static rendering is a strategy where the HTML is generated at build time, along with the HTML, the RSC payload is created for each component, Javascript chunks are produced for client-side component hydration in the browser
+Static rendering is great for performace and use cases include blogs, documentation, marketing pages etc.
+Production server vs development server
+For production, an optimized build is created once and you debploy that build
+A development server
+
+The routes on the home page are prefetched which means the routes are preloaded in the background before the user navigates to it
+Routes are automatically prefetched as they become visble in the users viewpoint, either when the page first loads or as it comes into view through scrolling
+for static routes the entire routes are prefetched and cached by default
+
+When we load the homepage, next.js prefetched the about and dashboard routes keeping them ready for instant navigation
+
+Dynamic rendering
+If dynamic function is discovered, next.js will switch to dynaically rendering the whole route
+In next.js these dynamic function are: cookies(), headers(), and searchParams
+Using any of these will opt the whole route into dynamic rendering at request
+
+Dynamic rendering is a straegy where thr HTML is generated at request time. Next.js automatically switchs to dynamnic rendering when it comes across a dynamic function in the component, such as cookies(), headers(), or the searchParams object
+This for of rendering is great for when we need to render HTML personalized to a user, such as a socail media feed
+
+As a developer you do not need to choose between static and dynamic rendering. Next.js will automatically choose the best rendering startegy for each route based on the features and API used
+
+
+Streaming is a stratgy that allows for progressive UI rendering from the server, work is divided into chunks and streamed to the client as soon as it's ready. This enables users to see parts of the page immediately, before the entire content has finished rendering. Streaming significatnly imporves both the initial page loading performance and the rendering of UI elements that rely on slower data fetches, which would otherwise block the rendering of the entire route
+Streaming is integrated into the next.js App Router by default
+
+
+Server- only code:
+Certain code is intended to execute only on the server
+You might have modules or functions that use mutliple libraries, use environment variables, interact directly with a database, or process confidential information
+Since Javascript Modules can be shared, its possible for code thats meant only for the server to unintentionally end up in the client
+If server side code gets bundled into the client-side javascript, it could lead to a bloated bundle size, expose secret keys, database queries, and sensitive business logic
+Its crucial to seperate server-only code from client-side code to protect the applications secuirty and integrity
+USE a server-only package to aviod this, this provides a build time error if developers accidentally import one of these modeules into a client component
+
+
+WHYS:
+npx lets you execute a package without having it installed
+npx create-next-app --ts lets you use typescript
+heroicons-svg images from creators of tailwind
